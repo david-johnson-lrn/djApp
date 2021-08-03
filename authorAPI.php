@@ -58,9 +58,21 @@ $signed_request = $Init->generate();
             readyListener: function() {
                 console.log("ready listener fired");
 
+                authorApp.on('save', function(e) {
+
+                    authorApp.setItemTags([{
+                        "type": 'djApp',
+                        'name': 'djApp'
+                    }])
+
+
+                });
+
+
             }
         })
     </script>
+    <a href="/index.php"><button>Home</button></a>
 
 
 </body>
