@@ -83,8 +83,8 @@
 
 
         <form method="GET">
-            <input type="text" id="topic" name="first" style="display:none;">
-            <input type="text" id="state" name="last" style="display:none;">
+            <input type="text" id="topic" name="topic" style="display:none;">
+            <input type="text" id="state" name="state" style="display:none;">
             <input type="submit">
         </form>
         <!-- http://localhost:8001/index.php?first=&last= -->
