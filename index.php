@@ -46,15 +46,63 @@
         <div class="col d-flex justify-content-center">
 
             <h1> Choose a Topic</h1>
+
         </div>
+
         <div class="col d-flex justify-content-center">
 
-            <h1> Choose a State</h1>
+
+            <button type="button" name="topic" class="btn btn-outline-primary" value="Geography">Geography</button>
+            <button type="button" name="topic" class="btn btn-outline-warning" value="Politics">Politics</button>
+            <button type="button" name="topic" class="btn btn-outline-danger" value="History">History</button>
+
+
+
         </div>
 
 
 
-    </div>
+
+        <h1> Choose a State</h1>
+
+
+
+
+        <div class="col d-flex justify-content-center">
+
+            <button type="button" name="state" value="NY" class="btn btn-outline-info">NY</button>
+            <button type="button" name="state" value="NJ" class="btn btn-outline-danger">NJ</button>
+            <button type="button" name="state" value="PA" class="btn btn-outline-success">PA</button>
+            <button type="button" name="state" value="CT" class="btn btn-outline-warning">CT</button>
+            <button type="button" name="state" value="MA" class="btn btn-outline-dark">MA</button>
+
+        </div>
+
+
+
+
+
+        <form method="GET">
+            <input type="text" id="topic" name="first" style="display:none;">
+            <input type="text" id="state" name="last" style="display:none;">
+            <input type="submit">
+        </form>
+        <!-- http://localhost:8001/index.php?first=&last= -->
+
+
+
+
+
+
+
+
+
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/index.js">
+    //need to get values from button clicks to send to another file to make API call of ItemsAPI assessment player
+</script>
+
 
 </html>
