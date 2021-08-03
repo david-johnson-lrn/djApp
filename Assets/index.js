@@ -15,7 +15,20 @@ $(document).ready(function () {
         }
 
 
+        $("#submitBtn").removeClass("hide");
+
+
+
+
     })
+
+
+    $("#submitBtn").on("click", function () {
+        $("#appear").removeClass("hide");
+
+    })
+
+
 
 
 

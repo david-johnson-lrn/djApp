@@ -16,6 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Assets/style.css">
     <title>Document</title>
 </head>
 
@@ -82,12 +83,15 @@
 
 
 
-        <form method="GET">
-            <input type="text" id="topic" name="topic" style="display:none;">
-            <input type="text" id="state" name="state" style="display:none;">
-            <input type="submit">
+        <form action="./itemsAssess.php" method="GET">
+            <input type="text" id="topic" name="topic" class="hide">
+            <input type="text" id="state" name="state" class="hide">
+            <input type="submit" class="hide" id="submitBtn" value="beginTest">
         </form>
-        <!-- http://localhost:8001/index.php?first=&last= -->
+
+
+    </div>
+
 
 
 
@@ -100,7 +104,7 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="/index.js">
+<script src="./Assets/index.js">
     //need to get values from button clicks to send to another file to make API call of ItemsAPI assessment player
 </script>
 
