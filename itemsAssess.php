@@ -2,7 +2,7 @@
 
 $topic = $_GET['topic'];
 $state = $_GET['state'];
-
+$items = [];
 
 echo "Your topic is {$topic} and you picked {$state} as your state";
 
@@ -31,7 +31,16 @@ $request_data = [
             [
                 'type' => 'djApp',
                 'name' => 'djApp'
+            ],
+            [
+                "type" => 'djAppState',
+                'name' => $state
+            ],
+            [
+                "type" => 'djAppTopic',
+                'name' => $topic
             ]
+            //can I add another all option and use a variable for the ;name' and 'topic'?
         ]
     ]
     //could enter either parameter here or potentially another all
@@ -44,6 +53,7 @@ $body = $dataRequest->getBody();
 
 $dataAPI_response = json_decode($body, true);
 
+
 ?>
 <pre>
 <?php
@@ -54,17 +64,32 @@ print_r($dataAPI_response);
 
 <?php
 
+// var_dump($dataAPI_response);
+
+
+if (count($dataAPI_response['data']) > 0) {
+    for ($i = 0; $i < count($dataAPI_response['data']); $i++) {
+        array_push($items, $dataAPI_response['data'][$i]['reference']);
+    }
+}
+
+// var_dump($items);
+
+
+
+//Create loop to push through reference names into array to serve up just in time assessment
+
 $session_id = Uuid::generate();
 $activity_id = $session_id;
 
-//Request object
+//Request object Just In Time Fixed Form Assessment, Need to feed Item Referenes
 $request = [
     'user_id' => 'testTaker',
     'rendering_type' => 'assess',
     'name' => 'djApp Items API Assess Player',
     'session_id' => $session_id,
     'activity_id' => $activity_id,
-    'items' => ['NY_Geo_1'], //<----- need to change this from the hardCoded string to the actually reference names from the dataAPI response
+    'items' => $items, //<----- This is an array which dynamically adds reference names found in dataAPI pull using the loop on line 70
     'type' => 'submit_practice',
     'config' => [
         'title' => 'djApp Asses Player',
@@ -88,10 +113,24 @@ $signedRequest = $Init->generate();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Test Player</title>
 </head>
 
 <body>
+    <nav class="navbar navbar-dark bg-light">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="./index.php">
+
+                <button type="button" class="btn btn-outline-secondary"> Home</button>
+
+
+            </a>
+
+        </div>
+    </nav>
+
 
     <div id="learnosity_assess"></div> <!-- This is where the test lives -->
 

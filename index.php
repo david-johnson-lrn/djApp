@@ -30,6 +30,13 @@
 
 
             </a>
+            <a class="navbar-brand" href="./index.php">
+
+                <button type="button" class="btn btn-outline-secondary"> Home</button>
+
+
+            </a>
+
         </div>
     </nav>
 
