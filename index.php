@@ -24,15 +24,10 @@
 
     <nav class="navbar navbar-dark bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/authorAPI.php">
 
-                <button type="button" class="btn btn-outline-secondary"> AuthorAPI</button>
-
-
-            </a>
             <a class="navbar-brand" href="./index.php">
 
-                <button type="button" class="btn btn-outline-secondary"> Home</button>
+                <button type="button" class="btn btn-outline-secondary navButton"> Home</button>
 
 
             </a>
@@ -70,8 +65,9 @@
 
 
 
-
-        <h1> Choose a State</h1>
+        <div class="col d-flex justify-content-center">
+            <h1> Choose a State</h1>
+        </div>
 
 
 

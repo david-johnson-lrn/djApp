@@ -17,8 +17,8 @@ $security = [
 $session_id = $_GET['session'];
 $user = $_GET['user'];
 
-echo $user, "<br>";
-echo $session_id;
+// echo $user, "<br>";
+// echo $session_id;
 
 
 
@@ -66,16 +66,41 @@ $signedRequest = $Init->generate();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Assets/style.css">
     <title>How did you Do?</title>
 </head>
 
 <body>
-    <h1>Take a look at your results below!</h1>
+
+    <nav class="navbar navbar-dark bg-light">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="./index.php">
+
+                <button type="button" class="btn btn-outline-secondary"> Home</button>
 
 
-    <span class="learnosity-report" id="report1"></span>
-    <span class="learnosity-report" id="report2"></span>
-    <span class="learnosity-report" id="report3"></span>
+            </a>
+
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <h1>Take a look at your results below!</h1>
+
+        <h1>Report 1 "Sessions - Summary"</h1>
+        <span class="learnosity-report" id="report1"></span>
+        <hr>
+        <h1>Report 2 "Sessions - Summary - By - Tag"</h1>
+        <span class="learnosity-report" id="report2"></span>
+        <hr>
+
+        <h1>Report 3 "Sessions - Detail - By - Item"</h1>
+        <span class="learnosity-report" id="report3"></span>
+
+
+    </div>
 
     <script src="//reports.learnosity.com"></script>
 

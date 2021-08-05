@@ -1,3 +1,10 @@
 .hide {
     display: none;
 }
+
+button {
+    margin: 10px;
+}
+.navButton{
+    float: right !important;
+}
