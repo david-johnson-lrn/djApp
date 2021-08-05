@@ -58,15 +58,16 @@ $signed_request = $Init->generate();
             readyListener: function() {
                 console.log("ready listener fired");
 
-                authorApp.on('save', function(e) {
+                // authorApp.on('save', function(e) {
 
-                    authorApp.setItemTags([{
-                        "type": 'djApp',
-                        'name': 'djApp'
-                    }])
+                //     authorApp.setItemTags([{
+                //         "type": 'djApp',
+                //         'name': 'djApp'
+                //     }])
 
 
-                });
+                // }); 
+                //commented out because each time I save it is overwriting my tags added from the Author Site
 
 
             }

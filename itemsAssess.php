@@ -81,8 +81,12 @@ if (count($dataAPI_response['data']) > 0) {
 
 $session_id = Uuid::generate();
 $activity_id = $session_id;
+echo "Your session Id is {$session_id}";
+//1bc1394e-a44d-450d-a2a6-f2b4b046286c
 
 //Request object Just In Time Fixed Form Assessment, Need to feed Item Referenes
+//Helping Mir
+
 $request = [
     'user_id' => 'testTaker',
     'rendering_type' => 'assess',
@@ -104,6 +108,7 @@ $Init = new Init('items', $security, $consumer_secret, $request);
 $signedRequest = $Init->generate();
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -121,7 +126,7 @@ $signedRequest = $Init->generate();
     <nav class="navbar navbar-dark bg-light">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="./index.php">
+            <a class="navbar-brand" id="nav" href="./index.php">
 
                 <button type="button" class="btn btn-outline-secondary"> Home</button>
 
@@ -140,6 +145,22 @@ $signedRequest = $Init->generate();
         let itemsApp = LearnosityItems.init(<?php echo $signedRequest; ?>, {
             readyListener: function() {
                 console.log("Listener Fired");
+
+                let session = "<?php echo $session_id ?>";
+                console.log(session)
+
+                itemsApp.on('test:submit', function() {
+                    console.log("Test is done")
+                    let reportButton = document.createElement("button");
+                    let link = document.createElement('a');
+                    reportButton.innerHTML = "Reports";
+                    link.setAttribute("href", "./reports.php?user=testTaker&session=" + session)
+                    let navBar = document.getElementById('nav');
+                    link.appendChild(reportButton);
+                    navBar.appendChild(link);
+
+
+                })
 
             }
         })
