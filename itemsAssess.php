@@ -26,6 +26,7 @@ $endpoint = 'https://data.learnosity.com/v2021.2.LTS/itembank/items';
 
 //Request Data
 $request_data = [
+    //maybe I can create a loop to have the user select more than one topic per category
     'advanced_tags' => [
         'all' => [
             [
@@ -54,16 +55,6 @@ $body = $dataRequest->getBody();
 $dataAPI_response = json_decode($body, true);
 
 
-?>
-<pre>
-<?php
-print_r($dataAPI_response);
-?>
-
-</pre>
-
-<?php
-
 // var_dump($dataAPI_response);
 
 
@@ -73,7 +64,7 @@ if (count($dataAPI_response['data']) > 0) {
     }
 }
 
-// var_dump($items);
+var_dump($items);
 
 
 
@@ -81,7 +72,7 @@ if (count($dataAPI_response['data']) > 0) {
 
 $session_id = Uuid::generate();
 $activity_id = $session_id;
-echo "Your session Id is {$session_id}";
+echo "<br> Your session Id is {$session_id}";
 //1bc1394e-a44d-450d-a2a6-f2b4b046286c
 
 //Request object Just In Time Fixed Form Assessment, Need to feed Item Referenes
@@ -100,15 +91,9 @@ $request = [
         'subtitle' => 'answer if you can'
     ]
 
-
 ];
-
 $Init = new Init('items', $security, $consumer_secret, $request);
-
 $signedRequest = $Init->generate();
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -119,25 +104,34 @@ $signedRequest = $Init->generate();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Assets/style.css">
     <title>Test Player</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-light">
-        <div class="container-fluid">
+    <div class="container-fluid">
 
-            <a class="navbar-brand" id="nav" href="./index.php">
+        <nav class="navbar-dark bg-light padding">
 
-                <button type="button" class="btn btn-outline-secondary"> Home</button>
+            <ul class="navbar-nav">
+                <li class="nav-item">
 
+                    <a class="navbar-brand" href="./index.php">
+                        <button type="button" class="btn btn-outline-secondary navButton"> Home</button>
+                    </a>
+                </li>
+                <li class="nav-item">
 
-            </a>
+                    <button type="button" id="add" class="btn btn-outline-secondary navButton"> add Item?</button>
+                </li>
+            </ul>
 
-        </div>
-    </nav>
+        </nav>
+        <div id="nav" class="col d-flex justify-content-center moveDown"></div>
 
+        <div id="learnosity_assess"></div> <!-- This is where the test lives -->
 
-    <div id="learnosity_assess"></div> <!-- This is where the test lives -->
+    </div>
 
     <script src="//items.learnosity.com?v2021.2.LTS"></script>
 
@@ -149,11 +143,29 @@ $signedRequest = $Init->generate();
                 let session = "<?php echo $session_id ?>";
                 console.log(session)
 
+
+                // itemsApp.on('test:save', function() {
+                //     console.log("Do you want to add more?")
+                // })
+
+                let add = document.getElementById("add");
+                add.addEventListener("click", function() {
+                    itemsApp.addItems({
+                        items: ["PA_Pol_9"],
+                        removePreviousItems: false
+                    })
+
+                    console.log('added item')
+                })
+
                 itemsApp.on('test:submit', function() {
                     console.log("Test is done")
                     let reportButton = document.createElement("button");
                     let link = document.createElement('a');
-                    reportButton.innerHTML = "Reports";
+                    reportButton.innerHTML = "Results!";
+                    reportButton.classList.add("btnGlow");
+                    reportButton.classList.add("btn")
+                    reportButton.classList.add("btn-outline-secondary")
                     link.setAttribute("href", "./reports.php?user=testTaker&session=" + session)
                     let navBar = document.getElementById('nav');
                     link.appendChild(reportButton);
@@ -167,5 +179,8 @@ $signedRequest = $Init->generate();
     </script>
 
 </body>
+
+
+
 
 </html>

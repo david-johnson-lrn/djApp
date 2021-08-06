@@ -2,9 +2,42 @@
     display: none;
 }
 
-button {
+.choice {
     margin: 10px;
+}
+.intro {
+    margin: 10px;
+}
+
+.moveDown {
+    margin-top: 30px;
+}
+
+.padding {
+    padding: 10px;
 }
 .navButton{
     float: right !important;
 }
+
+
+@keyframes glowing {
+    0% {
+      background-color: #c01408;
+      box-shadow: 0 0 5px #c01408;
+    }
+    50% {
+      background-color: #fa6c62;
+      box-shadow: 0 0 20px #fa6c62;
+    }
+    100% {
+      background-color: #c01408;
+      box-shadow: 0 0 5px #c01408;
+    }
+  
+}
+
+.btnGlow {
+    animation: glowing 1300ms infinite ;
+}
+

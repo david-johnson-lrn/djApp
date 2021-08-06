@@ -4,7 +4,17 @@ $(document).ready(function () {
     let topicFlag = false;
 
 
-    $('button').on("click", function () {
+    $(".intro").on("click", function () {
+        if ($(this).attr('id') === 'yes') {
+
+            $("#intro").addClass('hide')
+            $("#content").removeClass('hide')
+        }
+
+    })
+
+
+    $('.choice').on("click", function () {
 
         //controlling form to serve a topic and a state from user input
         if ($(this).attr('name') === 'topic') {

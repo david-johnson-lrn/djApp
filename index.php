@@ -22,17 +22,22 @@
 
 <body>
 
-    <nav class="navbar navbar-dark bg-light">
-        <div class="container-fluid">
+    <nav class="navbar-dark bg-light padding">
 
-            <a class="navbar-brand" href="./index.php">
+        <ul class="navbar-nav">
+            <li class="nav-item">
 
-                <button type="button" class="btn btn-outline-secondary navButton"> Home</button>
+                <a class="navbar-brand" href="./index.php">
+
+                    <button type="button" class="btn btn-outline-secondary navButton"> Home</button>
 
 
-            </a>
+                </a>
+            </li>
 
-        </div>
+        </ul>
+
+
     </nav>
 
     <!-- <a href="/authorAPI.php">
@@ -41,56 +46,69 @@
 
     <div class="container-fluid">
 
-        <div class="col d-flex justify-content-center">
+        <section id="intro">
 
-            <h1> Are you smarter than a Programmer?</h1>
+            <div class="col d-flex justify-content-center">
+
+                <h1> Would you like to test your knowledge?</h1>
+
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button id="yes" class="btn btn-outline-primary intro">I think so..</button>
+
+            </div>
+        </section>
+
+
+
+
+        <section id="content" class="hide">
+            <div class="col d-flex justify-content-center">
+
+                <h1> Choose a Topic</h1>
+
+            </div>
+
+            <div class="col d-flex justify-content-center">
+
+
+                <button type="button" name="topic" class="btn btn-outline-primary choice" value="Geography">Geography</button>
+                <button type="button" name="topic" class="btn btn-outline-warning choice" value="Politics">Politics</button>
+                <button type="button" name="topic" class="btn btn-outline-danger choice" value="History">History</button>
+
+
+
+            </div>
+
+
+
+            <div class="col d-flex justify-content-center">
+                <h1> Choose a State</h1>
+            </div>
+
+
+
+
+            <div class="col d-flex justify-content-center">
+
+                <button type="button" name="state" value="NY" class="btn btn-outline-info choice">NY</button>
+                <button type="button" name="state" value="NJ" class="btn btn-outline-danger choice">NJ</button>
+                <button type="button" name="state" value="PA" class="btn btn-outline-success choice">PA</button>
+                <button type="button" name="state" value="CT" class="btn btn-outline-warning choice">CT</button>
+                <button type="button" name="state" value="MA" class="btn btn-outline-dark choice">MA</button>
+
+            </div>
+
+
+        </section>
+
+        <div class="col d-flex justify-content-center moveDown">
+            <form action="./itemsAssess.php" method="GET">
+                <input type="text" id="topic" name="topic" class="hide">
+                <input type="text" id="state" name="state" class="hide">
+                <input type="submit" class="hide btnGlow btn btn-danger" id="submitBtn" value="beginTest">
+            </form>
         </div>
-
-        <div class="col d-flex justify-content-center">
-
-            <h1> Choose a Topic</h1>
-
-        </div>
-
-        <div class="col d-flex justify-content-center">
-
-
-            <button type="button" name="topic" class="btn btn-outline-primary" value="Geography">Geography</button>
-            <button type="button" name="topic" class="btn btn-outline-warning" value="Politics">Politics</button>
-            <button type="button" name="topic" class="btn btn-outline-danger" value="History">History</button>
-
-
-
-        </div>
-
-
-
-        <div class="col d-flex justify-content-center">
-            <h1> Choose a State</h1>
-        </div>
-
-
-
-
-        <div class="col d-flex justify-content-center">
-
-            <button type="button" name="state" value="NY" class="btn btn-outline-info">NY</button>
-            <button type="button" name="state" value="NJ" class="btn btn-outline-danger">NJ</button>
-            <button type="button" name="state" value="PA" class="btn btn-outline-success">PA</button>
-            <button type="button" name="state" value="CT" class="btn btn-outline-warning">CT</button>
-            <button type="button" name="state" value="MA" class="btn btn-outline-dark">MA</button>
-
-        </div>
-
-
-
-
-
-        <form action="./itemsAssess.php" method="GET">
-            <input type="text" id="topic" name="topic" class="hide">
-            <input type="text" id="state" name="state" class="hide">
-            <input type="submit" class="hide" id="submitBtn" value="beginTest">
-        </form>
 
 
     </div>

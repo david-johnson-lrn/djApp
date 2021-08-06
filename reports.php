@@ -26,10 +26,10 @@ $request = [
     'reports' => [
         [
             'id' => 'report1', //name of DOM HTML Hook
-            'type' => 'sessions-summary',
+            'type' => 'sessions-summary-by-question',
             'user_id' => 'testTaker',
             'session_ids' => [
-                "8fefb504-2ae1-4374-af01-191b1e2c9bce"
+                $session_id
             ]
         ],
         [
@@ -89,14 +89,22 @@ $signedRequest = $Init->generate();
     <div class="container-fluid">
         <h1>Take a look at your results below!</h1>
 
-        <h1>Report 1 "Sessions - Summary"</h1>
+
+        <div class="col d-flex justify-content-center">
+            <h4>Report 1 "Sessions - Summary"</h4>
+        </div>
         <span class="learnosity-report" id="report1"></span>
         <hr>
-        <h1>Report 2 "Sessions - Summary - By - Tag"</h1>
+
+        <div class="col d-flex justify-content-center">
+            <h4>Report 2 "Sessions - Summary - By - Tag"</h4>
+        </div>
         <span class="learnosity-report" id="report2"></span>
         <hr>
 
-        <h1>Report 3 "Sessions - Detail - By - Item"</h1>
+        <div class="col d-flex justify-content-center">
+            <h4>Report 3 "Sessions - Detail - By - Item"</h4>
+        </div>
         <span class="learnosity-report" id="report3"></span>
 
 
