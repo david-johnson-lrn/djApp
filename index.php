@@ -37,7 +37,6 @@
 
         </ul>
 
-
     </nav>
 
     <!-- <a href="/authorAPI.php">
@@ -46,50 +45,39 @@
 
     <div class="container-fluid">
 
-        <section id="intro">
 
-            <div class="col d-flex justify-content-center">
+        <section id="intro" class="card text-center">
 
-                <h1> Would you like to test your knowledge?</h1>
+            <h1 class="card-header"> Would you like to test your knowledge?</h1>
 
-            </div>
-            <div class="col d-flex justify-content-center">
+            <div class="text-center card-body">
                 <button id="yes" class="btn btn-outline-primary intro">I think so..</button>
-
             </div>
         </section>
 
+        <section id="content" class="hide card text-center">
 
 
+            <h1 class="card-header"> Choose a Topic</h1>
 
-        <section id="content" class="hide">
-            <div class="col d-flex justify-content-center">
-
-                <h1> Choose a Topic</h1>
-
-            </div>
-
-            <div class="col d-flex justify-content-center">
-
+            <div class="card-body">
 
                 <button type="button" name="topic" class="btn btn-outline-primary choice" value="Geography">Geography</button>
                 <button type="button" name="topic" class="btn btn-outline-warning choice" value="Politics">Politics</button>
                 <button type="button" name="topic" class="btn btn-outline-danger choice" value="History">History</button>
 
-
-
             </div>
 
 
 
-            <div class="col d-flex justify-content-center">
+            <div class="card-header">
                 <h1> Choose a State</h1>
             </div>
 
 
 
 
-            <div class="col d-flex justify-content-center">
+            <div class="card-body">
 
                 <button type="button" name="state" value="NY" class="btn btn-outline-info choice">NY</button>
                 <button type="button" name="state" value="NJ" class="btn btn-outline-danger choice">NJ</button>
