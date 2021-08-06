@@ -3,6 +3,7 @@
 $topic = $_GET['topic'];
 $state = $_GET['state'];
 $items = [];
+$total_item_pool = [];
 
 echo "Your topic is {$topic} and you picked {$state} as your state";
 
@@ -32,19 +33,10 @@ $request_data = [
             [
                 'type' => 'djApp',
                 'name' => 'djApp'
-            ],
-            [
-                "type" => 'djAppState',
-                'name' => $state
-            ],
-            [
-                "type" => 'djAppTopic',
-                'name' => $topic
             ]
-            //can I add another all option and use a variable for the ;name' and 'topic'?
         ]
     ]
-    //could enter either parameter here or potentially another all
+
 ];
 
 $lrnData = new DataApi();
@@ -55,25 +47,59 @@ $body = $dataRequest->getBody();
 $dataAPI_response = json_decode($body, true);
 
 
-// var_dump($dataAPI_response);
-
-
 if (count($dataAPI_response['data']) > 0) {
     for ($i = 0; $i < count($dataAPI_response['data']); $i++) {
-        array_push($items, $dataAPI_response['data'][$i]['reference']);
+        array_push($total_item_pool, $dataAPI_response['data'][$i]['reference']);
+    }
+}
+//Compose test of choices incase additional options are not selected
+$request_data_choice = [
+
+    'advanced_tags' => [
+        'all' => [
+            [
+                'type' => 'djApp',
+                'name' => 'djApp'
+            ], [
+                "type" => 'djAppState',
+                'name' => $state
+            ],
+            [
+                "type" => 'djAppTopic',
+                'name' => $topic
+            ]
+
+        ]
+    ]
+
+];
+
+$lrnData = new DataApi();
+$dataRequestChoice = $lrnData->request($endpoint, $security, $consumer_secret, json_encode($request_data_choice), $action);
+
+$body_choice = $dataRequestChoice->getBody();
+
+$dataAPI_response_choice = json_decode($body_choice, true);
+
+//Create loop to push through reference names into array to serve up just in time assessment
+if (count($dataAPI_response_choice['data']) > 0) {
+    for ($i = 0; $i < count($dataAPI_response_choice['data']); $i++) {
+        array_push($items, $dataAPI_response_choice['data'][$i]['reference']);
     }
 }
 
-var_dump($items);
 
+//loop through total items array and remove the selected tags to avoid duplicate items selected in add item randomization
+for ($i = 0; $i < 2; $i++) {
+    $search = array_search($items[$i], $total_item_pool);
 
+    unset($total_item_pool[$search]);
+}
 
-//Create loop to push through reference names into array to serve up just in time assessment
 
 $session_id = Uuid::generate();
 $activity_id = $session_id;
 echo "<br> Your session Id is {$session_id}";
-//1bc1394e-a44d-450d-a2a6-f2b4b046286c
 
 //Request object Just In Time Fixed Form Assessment, Need to feed Item Referenes
 //Helping Mir
@@ -84,7 +110,7 @@ $request = [
     'name' => 'djApp Items API Assess Player',
     'session_id' => $session_id,
     'activity_id' => $activity_id,
-    'items' => $items, //<----- This is an array which dynamically adds reference names found in dataAPI pull using the loop on line 70
+    'items' => $items, //<----- This is an array which dynamically adds reference names found in dataAPI pull
     'type' => 'submit_practice',
     'config' => [
         'title' => 'djApp Asses Player',
@@ -117,12 +143,12 @@ $signedRequest = $Init->generate();
                 <li class="nav-item">
 
                     <a class="navbar-brand" href="./index.php">
-                        <button type="button" class="btn btn-outline-secondary navButton"> Home</button>
+                        <button type="button" class="btn btn-outline-info navButton"> Home</button>
                     </a>
                 </li>
                 <li class="nav-item">
 
-                    <button type="button" id="add" class="btn btn-outline-secondary navButton"> add Item?</button>
+                    <button type="button" id="add" class="btn btn-outline-info navButton"> add Item?</button>
                 </li>
             </ul>
 
@@ -142,20 +168,34 @@ $signedRequest = $Init->generate();
 
                 let session = "<?php echo $session_id ?>";
                 console.log(session)
+                let allItems = Object.values(<?php echo json_encode($total_item_pool) ?>);
+                let extraQ = [];
 
-
+                console.log(allItems)
                 // itemsApp.on('test:save', function() {
                 //     console.log("Do you want to add more?")
                 // })
 
                 let add = document.getElementById("add");
+
                 add.addEventListener("click", function() {
+                    console.log(allItems.length);
+                    let number = prompt("How many random questions would you like to add?");
+
+                    for (let i = 0; i < number; i++) {
+                        let randomNumber = (Math.floor(Math.random() * allItems.length))
+                        console.log(randomNumber);
+                        extraQ.push(allItems[randomNumber])
+                        allItems.splice(randomNumber, 1)
+
+                    }
+                    console.log(extraQ);
+
                     itemsApp.addItems({
-                        items: ["PA_Pol_9"],
+                        items: extraQ,
                         removePreviousItems: false
                     })
 
-                    console.log('added item')
                 })
 
                 itemsApp.on('test:submit', function() {
@@ -170,6 +210,8 @@ $signedRequest = $Init->generate();
                     let navBar = document.getElementById('nav');
                     link.appendChild(reportButton);
                     navBar.appendChild(link);
+                    let add = document.getElementById("add");
+                    add.classList.add("hide")
 
 
                 })
@@ -179,8 +221,6 @@ $signedRequest = $Init->generate();
     </script>
 
 </body>
-
-
 
 
 </html>

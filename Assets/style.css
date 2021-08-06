@@ -41,3 +41,7 @@
     animation: glowing 1300ms infinite ;
 }
 
+.navbar-nav {
+    justify-content: space-between;
+    flex-direction: row;
+}
