@@ -17,19 +17,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./Assets/style.css">
-    <title>Document</title>
+    <title>Northeast Quiz</title>
 </head>
 
 <body>
 
-    <nav class="navbar-dark bg-light padding">
+    <nav class="navbar-dark bg-dark padding">
 
         <ul class="navbar-nav">
             <li class="nav-item">
 
                 <a class="navbar-brand" href="./index.php">
 
-                    <button type="button" class="btn btn-outline-secondary navButton"> Home</button>
+                    <button type="button" class="btn btn-secondary navButton"> Home</button>
 
 
                 </a>
@@ -45,8 +45,7 @@
 
     <div class="container-fluid">
 
-
-        <section id="intro" class="card text-center">
+        <section id="intro" class="card text-center moveDownFar">
 
             <h1 class="card-header"> Would you like to test your knowledge?</h1>
 
@@ -55,7 +54,7 @@
             </div>
         </section>
 
-        <section id="content" class="hide card text-center">
+        <section id="content" class="hide card text-center moveDown">
 
 
             <h1 class="card-header"> Choose a Topic</h1>

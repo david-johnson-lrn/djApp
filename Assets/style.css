@@ -12,6 +12,9 @@
 .moveDown {
     margin-top: 30px;
 }
+.moveDownFar {
+    margin-top: 100px;
+}
 
 .padding {
     padding: 10px;

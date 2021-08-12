@@ -114,7 +114,11 @@ $request = [
     'type' => 'submit_practice',
     'config' => [
         'title' => 'djApp Asses Player',
-        'subtitle' => 'answer if you can'
+        'subtitle' => 'answer if you can',
+        'regions' => 'main',
+        'configuration' => [
+            'responsive_regions' => true
+        ]
     ]
 
 ];
