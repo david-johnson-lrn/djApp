@@ -11,7 +11,9 @@ $consumer_secret = '74c5fd430cf1242a527f6223aebd42d30464be22';
 
 $security = [
     'consumer_key' => $consumer_key,
-    'domain' => $_SERVER["HTTP_HOST"]
+    //'domain' => $_SERVER["HTTP_HOST"]
+    'domain' => 'localhost'
+    //if error arises that items array needs at least one item, change domain to 'localhost"
 ];
 
 $session_id = $_GET['session'];

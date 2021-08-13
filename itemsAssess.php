@@ -20,7 +20,9 @@ $consumer_secret = '74c5fd430cf1242a527f6223aebd42d30464be22';
 //Security Object
 $security = [
     'consumer_key' => $consumer_key,
-    'domain' => $_SERVER["HTTP_HOST"]
+    //'domain' => $_SERVER["HTTP_HOST"]
+    'domain' => 'localhost'
+    //if error arises that items array needs at least one item, change domain to 'localhost"
 ];
 
 $endpoint = 'https://data.learnosity.com/v2021.2.LTS/itembank/items';
@@ -206,7 +208,8 @@ $signedRequest = $Init->generate();
                 })
 
                 itemsApp.on('test:finished:submit', function() {
-                    window.location.href = "/reports.php";
+                    window.location.href =
+                        "/reports.php?user=testTaker&session=" + session;
                     console.log(location.hostname);
                 })
 
