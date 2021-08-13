@@ -17,9 +17,6 @@ use LearnositySdk\Utils\Uuid;
 $consumer_key = 'downloaddemo4o7M';
 $consumer_secret = '74c5fd430cf1242a527f6223aebd42d30464be22';
 
-echo $_SERVER["HTTP_HOST"];
-
-
 //Security Object
 $security = [
     'consumer_key' => $consumer_key,
@@ -39,7 +36,6 @@ $request_data = [
             ]
         ]
     ]
-
 ];
 
 $lrnData = new DataApi();
@@ -49,7 +45,6 @@ $body = $dataRequest->getBody();
 
 $dataAPI_response = json_decode($body, true);
 
-
 if (count($dataAPI_response['data']) > 0) {
     for ($i = 0; $i < count($dataAPI_response['data']); $i++) {
         array_push($total_item_pool, $dataAPI_response['data'][$i]['reference']);
@@ -57,7 +52,6 @@ if (count($dataAPI_response['data']) > 0) {
 }
 //Compose test of choices incase additional options are not selected
 $request_data_choice = [
-
     'advanced_tags' => [
         'all' => [
             [
@@ -91,7 +85,6 @@ if (count($dataAPI_response_choice['data']) > 0) {
     }
 }
 
-
 //loop through total items array and remove the selected tags to avoid duplicate items selected in add item randomization
 for ($i = 0; $i < 2; $i++) {
     $search = array_search($items[$i], $total_item_pool);
@@ -99,13 +92,11 @@ for ($i = 0; $i < 2; $i++) {
     unset($total_item_pool[$search]);
 }
 
-
 $session_id = Uuid::generate();
 $activity_id = $session_id;
 echo "<br> Your session Id is {$session_id}";
 
 //Request object Just In Time Fixed Form Assessment, Need to feed Item Referenes
-//Helping Mir
 
 $request = [
     'user_id' => 'testTaker',
@@ -129,8 +120,6 @@ $request = [
 $Init = new Init('items', $security, $consumer_secret, $request);
 $signedRequest = $Init->generate();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -138,8 +127,9 @@ $signedRequest = $Init->generate();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- Bootstrap is causing the cloze block to change styling when clicked and dragged -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <!-- Bootstrap 5 is causing the cloze block to change styling when clicked and dragged.  The heigh 100% on the lrn_btn_drag specificallt -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./Assets/style.css">
     <title>Test Player</title>
 </head>
@@ -165,8 +155,6 @@ $signedRequest = $Init->generate();
         </nav>
         <div id="nav" class="col d-flex justify-content-center moveDown"></div>
 
-
-
     </div>
     <div id="learnosity_assess"></div> <!-- This is where the test lives -->
 
@@ -183,15 +171,18 @@ $signedRequest = $Init->generate();
                 let extraQ = [];
 
                 console.log(allItems)
-                // itemsApp.on('test:save', function() {
-                //     console.log("Do you want to add more?")
-                // })
 
                 let add = document.getElementById("add");
 
                 add.addEventListener("click", function() {
                     console.log(allItems.length);
-                    let number = prompt("How many random questions would you like to add?");
+                    let number = parseInt(prompt("How many random questions would you like to add? Choose a number 1 through 28."));
+
+                    if (number >= 28) {
+                        number = prompt("Please choose a number less than 28")
+                    } else if (number === 0) {
+                        number = prompt("You should pick at least 1 added question");
+                    }
 
                     for (let i = 0; i < number; i++) {
                         let randomNumber = (Math.floor(Math.random() * allItems.length))
@@ -206,32 +197,28 @@ $signedRequest = $Init->generate();
                         items: extraQ,
                         removePreviousItems: false
                     })
-
                 })
 
                 itemsApp.on('test:submit', function() {
                     console.log("Test is done")
-                    let reportButton = document.createElement("button");
-                    let link = document.createElement('a');
-                    reportButton.innerHTML = "Results!";
-                    reportButton.classList.add("btnGlow");
-                    reportButton.classList.add("btn")
-                    reportButton.classList.add("btn-outline-secondary")
-                    link.setAttribute("href", "./reports.php?user=testTaker&session=" + session)
-                    let navBar = document.getElementById('nav');
-                    link.appendChild(reportButton);
-                    navBar.appendChild(link);
                     let add = document.getElementById("add");
                     add.classList.add("hide")
-
-
                 })
 
+                itemsApp.on('test:finished:submit', function() {
+                    window.location.href = "/reports.php";
+                    console.log(location.hostname);
+                })
+
+                itemsApp.on('item:pause', function() {
+                    let add = document.getElementById("add").scrollIntoView();
+                    console.log("Paused")
+
+                })
             }
         })
     </script>
 
 </body>
-
 
 </html>

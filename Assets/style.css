@@ -23,7 +23,6 @@
     float: right !important;
 }
 
-
 @keyframes glowing {
     0% {
       background-color: #c01408;
@@ -47,4 +46,8 @@
 .navbar-nav {
     justify-content: space-between;
     flex-direction: row;
+}
+
+.lrn_btn_drag {
+    height: auto !important;
 }
