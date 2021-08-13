@@ -108,6 +108,7 @@ $request = [
     'user_id' => 'testTaker',
     'rendering_type' => 'assess',
     'name' => 'djApp Items API Assess Player',
+    // 'state' => 'initial',
     'session_id' => $session_id,
     'activity_id' => $activity_id,
     'items' => $items, //<----- This is an array which dynamically adds reference names found in dataAPI pull
@@ -126,6 +127,7 @@ $Init = new Init('items', $security, $consumer_secret, $request);
 $signedRequest = $Init->generate();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,6 +136,7 @@ $signedRequest = $Init->generate();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap is causing the cloze block to change styling when clicked and dragged -->
     <link rel="stylesheet" href="./Assets/style.css">
     <title>Test Player</title>
 </head>
@@ -159,9 +162,10 @@ $signedRequest = $Init->generate();
         </nav>
         <div id="nav" class="col d-flex justify-content-center moveDown"></div>
 
-        <div id="learnosity_assess"></div> <!-- This is where the test lives -->
+
 
     </div>
+    <div id="learnosity_assess"></div> <!-- This is where the test lives -->
 
     <script src="//items.learnosity.com?v2021.2.LTS"></script>
 
