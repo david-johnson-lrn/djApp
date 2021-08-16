@@ -67,10 +67,8 @@ $request_data_choice = [
                 "type" => 'djAppTopic',
                 'name' => $topic
             ]
-
         ]
     ]
-
 ];
 
 $lrnData = new DataApi();
@@ -117,7 +115,6 @@ $request = [
             'responsive_regions' => true
         ]
     ]
-
 ];
 $Init = new Init('items', $security, $consumer_secret, $request);
 $signedRequest = $Init->generate();
@@ -140,7 +137,6 @@ $signedRequest = $Init->generate();
     <div class="container-fluid">
 
         <nav class="navbar-dark bg-light padding">
-
             <ul class="navbar-nav">
                 <li class="nav-item">
 
@@ -153,8 +149,8 @@ $signedRequest = $Init->generate();
                     <button type="button" id="add" class="btn btn-outline-info navButton"> add Item?</button>
                 </li>
             </ul>
-
         </nav>
+
         <div id="nav" class="col d-flex justify-content-center moveDown"></div>
 
     </div>
@@ -171,34 +167,40 @@ $signedRequest = $Init->generate();
                 console.log(session)
                 let allItems = Object.values(<?php echo json_encode($total_item_pool) ?>);
                 let extraQ = [];
-
-                console.log(allItems)
-
+                let count = 2;
                 let add = document.getElementById("add");
 
                 add.addEventListener("click", function() {
-                    console.log(allItems.length);
-                    let number = parseInt(prompt("How many random questions would you like to add? Choose a number 1 through 28."));
+                    console.log(allItems)
+                    console.log("questions are now: " + count)
 
-                    if (number >= 28) {
-                        number = prompt("Please choose a number less than 28")
-                    } else if (number === 0) {
-                        number = prompt("You should pick at least 1 added question");
+                    if (count >= 30) {
+                        alert("You have a total of " + count + " questions.  30 is the most number of questions we can offer.")
+                    } else {
+                        console.log(allItems.length);
+                        let number = parseInt(prompt("How many random questions would you like to add? Choose a number 1 through 28."));
+                        if (number <= 28 && number <= allItems.length) {
+                            count += parseInt(number);
+                            console.log("total number of questions is now:" + count);
+
+                            for (let i = 0; i < number; i++) {
+                                let randomNumber = (Math.floor(Math.random() * allItems.length))
+                                console.log(randomNumber);
+                                extraQ.push(allItems[randomNumber])
+                                allItems.splice(randomNumber, 1)
+                            }
+                            console.log(extraQ);
+
+                            itemsApp.addItems({
+                                items: extraQ,
+                                removePreviousItems: false
+                            })
+                            extraQ = [];
+
+                        } else {
+                            alert("Invalid number.  There are only " + allItems.length + " questions left to choose from.")
+                        }
                     }
-
-                    for (let i = 0; i < number; i++) {
-                        let randomNumber = (Math.floor(Math.random() * allItems.length))
-                        console.log(randomNumber);
-                        extraQ.push(allItems[randomNumber])
-                        allItems.splice(randomNumber, 1)
-
-                    }
-                    console.log(extraQ);
-
-                    itemsApp.addItems({
-                        items: extraQ,
-                        removePreviousItems: false
-                    })
                 })
 
                 itemsApp.on('test:submit', function() {
