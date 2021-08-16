@@ -51,3 +51,16 @@
 .lrn_btn_drag {
     height: auto !important;
 }
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+.lightText {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+}
+.darkText{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}

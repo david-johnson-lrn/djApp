@@ -20,8 +20,8 @@ $consumer_secret = '74c5fd430cf1242a527f6223aebd42d30464be22';
 //Security Object
 $security = [
     'consumer_key' => $consumer_key,
-    'domain' => $_SERVER["HTTP_HOST"]
-    //'domain' => 'localhost'
+    //'domain' => $_SERVER["HTTP_HOST"]
+    'domain' => 'localhost'
     //if error arises that items array needs at least one item, change domain to 'localhost"
 ];
 
@@ -129,6 +129,7 @@ $signedRequest = $Init->generate();
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
     <!-- Bootstrap 5 is causing the cloze block to change styling when clicked and dragged.  The heigh 100% on the lrn_btn_drag specificallt -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link rel="stylesheet" href="./Assets/style.css">
     <title>Test Player</title>
 </head>

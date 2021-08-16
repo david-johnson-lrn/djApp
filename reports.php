@@ -11,8 +11,8 @@ $consumer_secret = '74c5fd430cf1242a527f6223aebd42d30464be22';
 
 $security = [
     'consumer_key' => $consumer_key,
-    'domain' => $_SERVER["HTTP_HOST"]
-    //'domain' => 'localhost'
+    //'domain' => $_SERVER["HTTP_HOST"]
+    'domain' => 'localhost'
     //if error arises that items array needs at least one item, change domain to 'localhost"
 ];
 
@@ -69,6 +69,10 @@ $signedRequest = $Init->generate();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;1,400;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./Assets/style.css">
     <title>How did you Do?</title>
 </head>
@@ -82,30 +86,31 @@ $signedRequest = $Init->generate();
 
                 <button type="button" class="btn btn-outline-secondary"> Home</button>
 
-
             </a>
 
         </div>
     </nav>
 
     <div class="container-fluid">
-        <h1>Take a look at your results below!</h1>
-
+        <br>
+        <h1 class="text-center title" style="font-style: italic; text-decoration: underline;">Take a look at your results below!</h1>
+        <br>
+        <br>
 
         <div class="col d-flex justify-content-center">
-            <h4>Report 1 "Sessions - Summary"</h4>
+            <h4 class="darkText">Report 1 "Sessions - Summary"</h4>
         </div>
         <span class="learnosity-report" id="report1"></span>
         <hr>
 
         <div class="col d-flex justify-content-center">
-            <h4>Report 2 "Sessions - Summary - By - Tag"</h4>
+            <h4 class="darkText">Report 2 "Sessions - Summary - By - Tag"</h4>
         </div>
         <span class="learnosity-report" id="report2"></span>
         <hr>
 
         <div class="col d-flex justify-content-center">
-            <h4>Report 3 "Sessions - Detail - By - Item"</h4>
+            <h4 class="darkText">Report 3 "Sessions - Detail - By - Item"</h4>
         </div>
         <span class="learnosity-report" id="report3"></span>
 
