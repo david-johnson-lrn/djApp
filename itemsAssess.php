@@ -216,7 +216,7 @@ $signedRequest = $Init->generate();
 
                 itemsApp.on('test:finished:submit', function() {
                     window.location.href =
-                        "/djApp/reports.php?user=testTaker&session=" + session;
+                        "/reports.php?user=testTaker&session=" + session;
                     console.log(location.hostname);
                 })
 
