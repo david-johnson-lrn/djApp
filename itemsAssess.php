@@ -5,8 +5,6 @@ $state = $_GET['state'];
 $items = [];
 $total_item_pool = [];
 
-echo "Your topic is {$topic} and you picked {$state} as your state";
-
 //Need to render ItemsAPI in Assess mode using specific tags.  First all djApp tags, then GET variable tags
 require_once 'sdk/src/LearnositySdk/autoload.php';
 
@@ -17,11 +15,17 @@ use LearnositySdk\Utils\Uuid;
 $consumer_key = 'downloaddemo4o7M';
 $consumer_secret = '74c5fd430cf1242a527f6223aebd42d30464be22';
 
+if (substr($_SERVER["HTTP_HOST"], 0, 9) === "localhost") {
+    $domain = "localhost";
+} else {
+    $domain = $_SERVER["HTTP_HOST"];
+}
+
 //Security Object
 $security = [
     'consumer_key' => $consumer_key,
-    'domain' => $_SERVER["HTTP_HOST"]
-    //'domain' => 'localhost'
+    //'domain' => $_SERVER["HTTP_HOST"]
+    'domain' => $domain
     //if error arises that items array needs at least one item, change domain to 'localhost"
 ];
 
@@ -94,7 +98,6 @@ for ($i = 0; $i < 2; $i++) {
 
 $session_id = Uuid::generate();
 $activity_id = $session_id;
-echo "<br> Your session Id is {$session_id}";
 
 //Request object Just In Time Fixed Form Assessment, Need to feed Item Referenes
 
@@ -163,6 +166,7 @@ $signedRequest = $Init->generate();
         let itemsApp = LearnosityItems.init(<?php echo $signedRequest; ?>, {
             readyListener: function() {
                 console.log("Listener Fired");
+                console.log("The state chosen was: <?php echo $state; ?> and topic chosen was: <?php echo $topic; ?>")
 
                 let session = "<?php echo $session_id ?>";
                 console.log(session)
@@ -212,7 +216,7 @@ $signedRequest = $Init->generate();
 
                 itemsApp.on('test:finished:submit', function() {
                     window.location.href =
-                        "/reports.php?user=testTaker&session=" + session;
+                        "/djApp/reports.php?user=testTaker&session=" + session;
                     console.log(location.hostname);
                 })
 

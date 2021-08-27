@@ -27,7 +27,7 @@
         <ul class="navbar-nav">
             <li class="nav-item">
 
-                <a class="navbar-brand" href="./index.php">
+                <a class="navbar-brand" href="/index.php">
 
                     <button type="button" class="btn btn-secondary navButton"> Home </button>
 
